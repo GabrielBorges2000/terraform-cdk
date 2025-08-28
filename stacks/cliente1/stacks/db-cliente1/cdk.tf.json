@@ -1,0 +1,84 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "db-cliente1",
+      "version": "0.21.0"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "docker": [
+      {
+      }
+    ]
+  },
+  "resource": {
+    "docker_container": {
+      "postgresContainer-cliente1": {
+        "//": {
+          "metadata": {
+            "path": "db-cliente1/postgresContainer-cliente1",
+            "uniqueId": "postgresContainer-cliente1"
+          }
+        },
+        "env": [
+          "POSTGRES_USER=cliente1",
+          "POSTGRES_PASSWORD=docker",
+          "POSTGRES_DB=docker"
+        ],
+        "image": "${docker_image.PostgresImage-cliente1.name}",
+        "name": "postgres-cliente1",
+        "ports": [
+          {
+            "external": 8001,
+            "internal": 5432
+          }
+        ],
+        "volumes": [
+          {
+            "container_path": "/var/lib/postgresql/data",
+            "volume_name": "${docker_volume.pgdata-cliente1.name}"
+          }
+        ]
+      }
+    },
+    "docker_image": {
+      "PostgresImage-cliente1": {
+        "//": {
+          "metadata": {
+            "path": "db-cliente1/PostgresImage-cliente1",
+            "uniqueId": "PostgresImage-cliente1"
+          }
+        },
+        "keep_locally": true,
+        "name": "postgres:latest"
+      }
+    },
+    "docker_volume": {
+      "pgdata-cliente1": {
+        "//": {
+          "metadata": {
+            "path": "db-cliente1/pgdata-cliente1",
+            "uniqueId": "pgdata-cliente1"
+          }
+        },
+        "name": "pgdata_cliente1"
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/home/codeborges/Documentos/github/terraform-cdk/terraform.db-cliente1.tfstate"
+      }
+    },
+    "required_providers": {
+      "docker": {
+        "source": "kreuzwerker/docker",
+        "version": "3.6.2"
+      }
+    }
+  }
+}
