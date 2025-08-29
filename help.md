@@ -28,7 +28,7 @@
 
   Upgrades:
     npm run upgrade        Upgrade cdktf modules to latest version
-    npm run upgrade:next   Upgrade cdktf modules to latest "@next" version (last commit)
+    npm run upgrade:next   Upgrade cdktf modules to latest "@next" version (last commit)2w
 
  Use Providers:
 

@@ -1,32 +1,33 @@
-import { Construct } from "constructs";
-import { TerraformStack } from "cdktf";
-import { DockerProvider } from "@cdktf/provider-docker/lib/provider";
-import { Image } from "@cdktf/provider-docker/lib/image";
-import { Container } from "@cdktf/provider-docker/lib/container";
-import { Volume } from "@cdktf/provider-docker/lib/volume";
+import { Container } from '@cdktf/provider-docker/lib/container'
+import { Image } from '@cdktf/provider-docker/lib/image'
+import { DockerProvider } from '@cdktf/provider-docker/lib/provider'
+import { Volume } from '@cdktf/provider-docker/lib/volume'
+import { TerraformStack } from 'cdktf'
+import type { Construct } from 'constructs'
 
 export interface PostgresConfig {
-  name: string;
-  port: number;
-  user: string;
-  password: string;
-  database: string;
+  name: string
+  port: number
+  username: string
+  password: string
+  database: string
+  path?: string
 }
 
-export class PostgresStack extends TerraformStack {
+export class PostgresqlResource extends TerraformStack {
   constructor(scope: Construct, id: string, config: PostgresConfig) {
-    super(scope, id);
+    super(scope, id)
 
-    new DockerProvider(this, "docker", {});
+    new DockerProvider(this, 'docker', {})
 
     const dockerImage = new Image(this, `PostgresImage-${config.name}`, {
-      name: "postgres:latest", 
+      name: 'postgres:latest',
       keepLocally: true,
-    });
+    })
 
     const pgVolume = new Volume(this, `pgdata-${config.name}`, {
       name: `pgdata_${config.name}`,
-    });
+    })
 
     new Container(this, `postgresContainer-${config.name}`, {
       name: `postgres-${config.name}`,
@@ -38,16 +39,16 @@ export class PostgresStack extends TerraformStack {
         },
       ],
       env: [
-        `POSTGRES_USER=${config.user}`,
+        `POSTGRES_USER=${config.username}`,
         `POSTGRES_PASSWORD=${config.password}`,
         `POSTGRES_DB=${config.database}`,
       ],
       volumes: [
         {
           volumeName: pgVolume.name,
-          containerPath: "/var/lib/postgresql/data",
+          containerPath: '/var/lib/postgresql/data',
         },
       ],
-    });
+    })
   }
 }

@@ -1,26 +1,20 @@
-import express from "express";
-import { createPostgresStack, destroyPostgresStack } from "./cdktfHelper";
+import { app } from './app'
+import { checkConnectionDatabase } from './checks/check-database-connection'
 
-const app = express();
-app.use(express.json());
-
-app.post("/databases", (req, res) => {
+const start = async () => {
   try {
-    const stackPath = createPostgresStack(req.body);
-    res.status(201).send({ message: `Banco ${req.body.name} criado`, stackPath });
-  } catch (err) {
-    res.status(500).send({ error: err.message });
-  }
-});
+    await app.listen({
+      host: '0.0.0.0',
+      port: 3333,
+    })
 
-// Destruir banco
-app.delete("/databases/:name", (req, res) => {
-  try {
-    const stackPath = destroyPostgresStack(req.params.name);
-    res.status(200).send({ message: `Banco ${req.params.name} removido`, stackPath });
-  } catch (err) {
-    res.status(500).send({ error: err.message });
-  }
-});
+    await checkConnectionDatabase()
 
-app.listen(3333, () => console.log("API rodando em http://localhost:3333"));
+    console.log('🚀 HTTP Server Running!')
+  } catch (error) {
+    console.error('Server error =>', error)
+    process.exit(1)
+  }
+}
+
+start()
