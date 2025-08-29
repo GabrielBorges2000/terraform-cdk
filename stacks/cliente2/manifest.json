@@ -1,0 +1,16 @@
+{
+  "stacks": {
+    "db-cliente2": {
+      "annotations": [
+      ],
+      "constructPath": "db-cliente2",
+      "dependencies": [
+      ],
+      "name": "db-cliente2",
+      "stackMetadataPath": "stacks/db-cliente2/metadata.json",
+      "synthesizedStackPath": "stacks/db-cliente2/cdk.tf.json",
+      "workingDirectory": "stacks/db-cliente2"
+    }
+  },
+  "version": "0.21.0"
+}

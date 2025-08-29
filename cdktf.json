@@ -7,7 +7,5 @@
     "kreuzwerker/docker"
   ],
   "terraformModules": [],
-  "context": {
-
-  }
+  "context": {}
 }

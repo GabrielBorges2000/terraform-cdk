@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "local",
-      "stackName": "db-cliente1",
+      "stackName": "db-cliente2",
       "version": "0.21.0"
     },
     "outputs": {
@@ -16,40 +16,40 @@
   },
   "resource": {
     "docker_container": {
-      "postgresContainer-cliente1": {
+      "postgresContainer-cliente2": {
         "//": {
           "metadata": {
-            "path": "db-cliente1/postgresContainer-cliente1",
-            "uniqueId": "postgresContainer-cliente1"
+            "path": "db-cliente2/postgresContainer-cliente2",
+            "uniqueId": "postgresContainer-cliente2"
           }
         },
         "env": [
-          "POSTGRES_USER=cliente1",
+          "POSTGRES_USER=cliente2",
           "POSTGRES_PASSWORD=docker",
           "POSTGRES_DB=docker"
         ],
-        "image": "${docker_image.PostgresImage-cliente1.name}",
-        "name": "postgres-cliente1",
+        "image": "${docker_image.PostgresImage-cliente2.name}",
+        "name": "postgres-cliente2",
         "ports": [
           {
-            "external": 8001,
+            "external": 8002,
             "internal": 5432
           }
         ],
         "volumes": [
           {
             "container_path": "/var/lib/postgresql/data",
-            "volume_name": "${docker_volume.pgdata-cliente1.name}"
+            "volume_name": "${docker_volume.pgdata-cliente2.name}"
           }
         ]
       }
     },
     "docker_image": {
-      "PostgresImage-cliente1": {
+      "PostgresImage-cliente2": {
         "//": {
           "metadata": {
-            "path": "db-cliente1/PostgresImage-cliente1",
-            "uniqueId": "PostgresImage-cliente1"
+            "path": "db-cliente2/PostgresImage-cliente2",
+            "uniqueId": "PostgresImage-cliente2"
           }
         },
         "keep_locally": true,
@@ -57,21 +57,21 @@
       }
     },
     "docker_volume": {
-      "pgdata-cliente1": {
+      "pgdata-cliente2": {
         "//": {
           "metadata": {
-            "path": "db-cliente1/pgdata-cliente1",
-            "uniqueId": "pgdata-cliente1"
+            "path": "db-cliente2/pgdata-cliente2",
+            "uniqueId": "pgdata-cliente2"
           }
         },
-        "name": "pgdata_cliente1"
+        "name": "pgdata_cliente2"
       }
     }
   },
   "terraform": {
     "backend": {
       "local": {
-        "path": "/home/codeborges/Documentos/github/terraform-cdk/terraform.db-cliente1.tfstate"
+        "path": "/home/codeborges/Documentos/github/terraform-cdk/terraform.db-cliente2.tfstate"
       }
     },
     "required_providers": {

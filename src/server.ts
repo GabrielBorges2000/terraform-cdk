@@ -4,7 +4,6 @@ import { createPostgresStack, destroyPostgresStack } from "./cdktfHelper";
 const app = express();
 app.use(express.json());
 
-// Criar banco 
 app.post("/databases", (req, res) => {
   try {
     const stackPath = createPostgresStack(req.body);
