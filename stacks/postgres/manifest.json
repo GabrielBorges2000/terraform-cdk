@@ -1,0 +1,16 @@
+{
+  "stacks": {
+    "db-postgres": {
+      "annotations": [
+      ],
+      "constructPath": "db-postgres",
+      "dependencies": [
+      ],
+      "name": "db-postgres",
+      "stackMetadataPath": "stacks/db-postgres/metadata.json",
+      "synthesizedStackPath": "stacks/db-postgres/cdk.tf.json",
+      "workingDirectory": "stacks/db-postgres"
+    }
+  },
+  "version": "0.21.0"
+}

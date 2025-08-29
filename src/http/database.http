@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:3333
+
+###
+
+POST {{baseUrl}}/databases
+Content-Type: application/json
+
+{
+  "name": "postgres",
+  "port": 5432,
+  "user": "docker",
+  "password": "docker",
+  "database": "cdktf-stacks"
+}
+
+###
+
+DELETE {{baseUrl}}/databases/postgres
+
